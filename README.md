@@ -5,3 +5,5 @@ It will also display facilities, opening times, a rating, and a location map for
 Users will be able to log in and submit ratings and reviews
 
 Using fake data for Loc8r.
+
+All copyrights belong to Manning Publications
