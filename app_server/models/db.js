@@ -24,3 +24,24 @@ gracefulShutDown = function (msg, callback) {
     callback();
   });
 };
+
+// For nodemon restarts
+process.once('SIGUSR2', function () {
+  gracefulShutDown('nodemon restart', function () {
+    process.kill(process.pid, 'SIGUSR2');
+  });
+});
+
+// For app termination
+process.on('SIGINT', function () {
+  gracefulShutDown('app termination', function () {
+    process.exit(0);
+  });
+});
+
+// For Heroku app termination
+process.on('SIGTERM', function () {
+  gracefulShutdown('Heroku app shutdown', function () {
+    process.exit(0);
+  });
+});
