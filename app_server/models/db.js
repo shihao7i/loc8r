@@ -1,6 +1,9 @@
 let mongoose = require('mongoose');
 let gracefulShutDown;
 let dbURI = 'mongodb://localhost/loc8r';
+if (process.env.NODE_ENV === 'production') {
+  dbURI = process.env.MONGODB_URI;
+}
 mongoose.connect(dbURI);
 
 mongoose.connection.on('connected', function () {
@@ -8,7 +11,7 @@ mongoose.connection.on('connected', function () {
 });
 
 mongoose.connection.on('error', function (err) {
-  console.log(`Mongoose connection error: ${error}`)
+  console.log(`Mongoose connection error: ${err}`)
 });
 
 mongoose.connection.on('disconnected', function () {
