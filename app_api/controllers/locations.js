@@ -9,3 +9,11 @@ var sendJsonResponse = function(res, status, content) {
 module.exports.locationsCreate = function (req, res) {
   sendJsonResponse(res, 200, {"status": "success"});
 };
+
+module.exports.locationsReadOne = function(req, res) {
+  Loc
+    .findById(req.params.locationid)
+    .exec(function(err, location) {
+      sendJsonResponse(res, 200, location);
+    });
+};
